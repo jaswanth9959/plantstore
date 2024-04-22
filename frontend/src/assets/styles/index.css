@@ -55,3 +55,53 @@ table th {
 .color {
   background-color: #c03221 !important;
 }
+
+.login-container {
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.login-heading {
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.form-control {
+  border-radius: 0;
+}
+
+.submit-button {
+  background-color: rgba(128, 143, 138, 0.993);
+}
+
+.submit-button :hover {
+  background-color: rgba(93, 103, 100, 0.993);
+}
+/* Sidebar styles */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 50vh; /* Make sidebar full height */
+}
+
+/* Navbar link styles */
+.flex-column {
+  color: #333;
+  flex-grow: 1; /* Distribute space equally */
+  display: flex;
+  align-items: center; /* Center align text vertically */
+}
+
+/* Content styles */
+.content {
+  padding-top: 20px;
+}
