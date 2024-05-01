@@ -1,7 +1,7 @@
 const plants = [
   {
     name: "Peace Lily",
-    image: "/images/1.jpg",
+    image: "/uploads/image-1714535055109.jpg",
     price: 20.99,
     type: "Indoor",
     category: "Foliage",
@@ -11,7 +11,7 @@ const plants = [
   },
   {
     name: "Snake Plant",
-    image: "/images/1.jpg",
+    image: "/uploads/image-1714535098014.jpg",
     price: 18.5,
     type: "Indoor",
     category: "Foliage",

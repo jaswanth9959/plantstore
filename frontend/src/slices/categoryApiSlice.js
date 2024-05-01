@@ -1,8 +1,23 @@
 import { apiSlice } from "./apiSlice";
 
-import { CATEGORY_URL } from "../constants";
+import { CATEGORY_URL, FER_URL } from "../constants";
 export const categoryApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
+    getAllFer: builder.query({
+      query: () => ({
+        url: `${FER_URL}`,
+        method: "GET",
+      }),
+      keepUnusedDataFor: 5,
+    }),
+    getFer: builder.query({
+      query: (ferId) => ({
+        url: `${FER_URL}/${ferId}`,
+        method: "GET",
+      }),
+      keepUnusedDataFor: 5,
+    }),
+
     getAllCategories: builder.query({
       query: () => ({
         url: CATEGORY_URL,
@@ -30,4 +45,6 @@ export const {
   useGetAllCategoriesQuery,
   useUpdateCategoryMutation,
   useGetCategoryQuery,
+  useGetAllFerQuery,
+  useGetFerQuery,
 } = categoryApiSlice;

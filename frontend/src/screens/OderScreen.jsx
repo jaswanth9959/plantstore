@@ -8,9 +8,7 @@ function OrderScreen() {
   const { userInfo } = useSelector((state) => state.auth);
   const { id: orderId } = useParams();
   const { data: order, isLoading, error } = useGetOrderDetailsQuery(orderId);
-  const addDecimals = (num) => {
-    return (Math.round(num * 100) / 100).toFixed(2);
-  };
+
   return isLoading ? (
     <p>Loading...</p>
   ) : error ? (
@@ -50,20 +48,7 @@ function OrderScreen() {
                         <Row>
                           <Col md={3}>{item.name}</Col>
                           <Col md={3}>{item.qty}</Col>
-                          <Col md={4}>
-                            ${item.qty * item.price}
-                            {item.addon ? (
-                              <span>+ ${item.additionalPrice}</span>
-                            ) : (
-                              <span>+ $0</span>
-                            )}
-                          </Col>
-                          <Col>
-                            $
-                            {item.addon
-                              ? addDecimals(item.price + item.additionalPrice)
-                              : addDecimals(item.price)}
-                          </Col>
+                          <Col md={4}>${item.qty * item.price}</Col>
                         </Row>
                         {item.customize && (
                           <Row className="my-3">
@@ -97,6 +82,13 @@ function OrderScreen() {
                   {order.user.firstName} {order.user.lastName}
                 </strong>
               </p>
+
+              {order.pickup && (
+                <ListGroup.Item>
+                  <h2>Pick Up time</h2>
+                  <p>{order.pickup}</p>
+                </ListGroup.Item>
+              )}
               {order.shippingAddress && (
                 <p>
                   Delivery Address:{" "}
@@ -115,7 +107,10 @@ function OrderScreen() {
                 <strong> {order.paymentMethod}</strong>
               </p>
               {order.isPaid ? (
-                <Message variant="success">Paid On: {order.paidAt}</Message>
+                <Message variant="success">
+                  Paid On: {new Date(order.paidAt).toLocaleDateString("en-US")}{" "}
+                  {new Date(order.paidAt).toLocaleTimeString("en-US")}
+                </Message>
               ) : (
                 <Message variant="danger">Not Paid</Message>
               )}
@@ -124,7 +119,9 @@ function OrderScreen() {
               <h3>Delivery Info:</h3>
               {order.orderStatus === "delivered" ? (
                 <Message variant="success">
-                  Delivered on: {order.deliveredAt}
+                  Delivered on:{" "}
+                  {new Date(order.deliveredAt).toLocaleDateString("en-US")}{" "}
+                  {new Date(order.deliveredAt).toLocaleTimeString("en-US")}
                 </Message>
               ) : (
                 <Message>{order.orderStatus}. Yet to be Delivered.</Message>

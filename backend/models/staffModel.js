@@ -28,6 +28,19 @@ const staffSchema = new mongoose.Schema(
       required: true,
       default: "staff",
     },
+    phone: {
+      type: String,
+    },
+    address: {
+      type: String,
+    },
+    dob: {
+      type: String,
+    },
+    first: {
+      type: Boolean,
+      default: true,
+    },
   },
   { timestamps: true }
 );

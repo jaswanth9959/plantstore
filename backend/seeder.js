@@ -9,7 +9,8 @@ import Category from "./models/categoryModel.js";
 import Plant from "./models/plantModel.js";
 import Staff from "./models/staffModel.js";
 import categorires from "./data/category.js";
-
+import Fertilizer from "./models/fertilizer.js";
+import fertilizers from "./data/fertilizer.js";
 dotenv.config();
 
 await connectDB();
@@ -20,12 +21,18 @@ const importData = async () => {
     await Plant.deleteMany();
     await Staff.deleteMany();
     await Category.deleteMany();
-
+    await Fertilizer.deleteMany();
     await User.insertMany(users);
     const createdCategory = await Category.insertMany(categorires);
     const createdStaff = await Staff.insertMany(staff);
 
     const adminStaff = createdStaff[0]._id;
+    const sampleFer = fertilizers.map((fer) => {
+      return {
+        ...fer,
+        createdBy: adminStaff,
+      };
+    });
 
     const samplePlants = plants.map((plant) => {
       return {
@@ -36,7 +43,7 @@ const importData = async () => {
     });
 
     await Plant.insertMany(samplePlants);
-
+    await Fertilizer.insertMany(sampleFer);
     console.log("---DATA HAS BEEN IMPORTED---");
     process.exit();
   } catch (error) {
@@ -52,6 +59,7 @@ const destroyData = async () => {
     await Plant.deleteMany();
     await Staff.deleteMany();
     await Category.deleteMany();
+    await Fertilizer.deleteMany();
 
     console.log("---DATA HAS BEEN DESTROYED---");
     process.exit();

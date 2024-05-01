@@ -6,6 +6,8 @@ import Payment from "../models/paymentModel.js";
 const createorder = asyncHandler(async (req, res) => {
   const {
     orderItems,
+    pickup,
+    otype,
     shippingAddress,
     paymentMethod,
     itemsPrice,
@@ -49,6 +51,8 @@ const createorder = asyncHandler(async (req, res) => {
     taxPrice,
     shippingPrice,
     totalPrice,
+    pickup,
+    otype,
   });
 
   const createdOrder = await order.save();

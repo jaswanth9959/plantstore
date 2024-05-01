@@ -51,27 +51,19 @@ function Orders() {
                   <td>
                     {order?.user?.firstName} {order?.user?.lastName}
                   </td>
-                  <td>{order?.createdAt.substring(0, 10)}</td>
+                  <td>
+                    {new Date(order.createdAt).toLocaleDateString("en-US")}
+                  </td>
                   <td>{order.orderType}</td>
                   <td>${order.totalPrice}</td>
 
-                  <td>
-                    {/* <Badge
-                      bg={`${
-                        reservation.reservationStatus === "Yet to Process"
-                          ? "primary"
-                          : reservation.reservationStatus === "Ready"
-                          ? "warning"
-                          : "success"
-                      }`}
-                    >
-                      {reservation.reservationStatus}
-                    </Badge> */}
-                    {order.orderStatus}
-                  </td>
+                  <td>{order.orderStatus}</td>
                   <td>
                     {order.isPaid ? (
-                      order?.paidAt?.substring(0, 10)
+                      <span>
+                        {new Date(order.paidAt).toLocaleDateString("en-US")}{" "}
+                        {new Date(order.paidAt).toLocaleTimeString("en-US")}
+                      </span>
                     ) : (
                       <p style={{ color: "red" }}> NO</p>
                     )}

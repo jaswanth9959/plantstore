@@ -2,23 +2,22 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { MdArrowBackIos } from "react-icons/md";
 import { Row, Col, Image, ListGroup, Button, Form } from "react-bootstrap";
 import { useState } from "react";
-import { useGetPlantByIdQuery } from "../slices/plantsApiSlice";
+import { useGetFerQuery } from "../slices/categoryApiSlice";
 import { FaShoppingCart } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { addTocart } from "../slices/cartSlice";
 import { useSelector } from "react-redux";
-function PlantScreen() {
+function FerScreen() {
   const { id } = useParams();
   const { userInfo } = useSelector((state) => state.auth);
-  const { data: plant, isLoading, error } = useGetPlantByIdQuery(id);
+  const { data: plant, isLoading, error } = useGetFerQuery(id);
 
   const [qty, setQty] = useState(1);
-  const [custom, setCustom] = useState("");
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const AddToCarthandler = () => {
-    dispatch(addTocart({ ...plant, qty, custom }));
+    dispatch(addTocart({ ...plant, qty }));
     if (userInfo.role === "user") {
       navigate("/cart");
     } else {
@@ -69,18 +68,7 @@ function PlantScreen() {
                     <Col>{plant.description}</Col>
                   </Row>
                 </ListGroup.Item>
-                <ListGroup.Item>
-                  <Row>
-                    <Col md={4}> Type:</Col>
-                    <Col> {plant.type}</Col>
-                  </Row>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <Row>
-                    <Col md={4}>Category:</Col>
-                    <Col>{plant.category?.name}</Col>
-                  </Row>
-                </ListGroup.Item>
+
                 <ListGroup.Item>
                   <Row>
                     <Col md={4}>Price:</Col>
@@ -111,20 +99,7 @@ function PlantScreen() {
                     </Row>
                   </ListGroup.Item>
                 )}
-                <ListGroup.Item>
-                  <Row>
-                    <Col md={4}>Customization</Col>
-                    <Col>
-                      <Form.Control
-                        type="text"
-                        placeholder="Customize your plant. let us know how you want it."
-                        value={custom}
-                        required
-                        onChange={(e) => setCustom(e.target.value)}
-                      ></Form.Control>
-                    </Col>
-                  </Row>
-                </ListGroup.Item>
+
                 <ListGroup.Item className="d-flex justify-content-end">
                   <Button
                     className=" btn btn-block"
@@ -145,4 +120,4 @@ function PlantScreen() {
   );
 }
 
-export default PlantScreen;
+export default FerScreen;

@@ -39,7 +39,7 @@ const CartScreen = () => {
 
   const checkoutHandler = () => {
     if (userInfo.role === "user") {
-      navigate("/login?redirect=/shipping");
+      navigate("/login?redirect=/options");
     } else {
       navigate("/dashboard/customer");
     }

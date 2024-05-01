@@ -3,18 +3,15 @@ export const addDecimals = (num) => {
 };
 
 export const updateCart = (state) => {
+  // const itemsPrice = state.cartItems.reduce(
+  //   (acc, item) =>
+  //     acc + (item.price * 100 * item.qty) / 100),
+  //   0)
+  // );
   const itemsPrice = state.cartItems.reduce(
-    (acc, item) =>
-      acc +
-      (item.addon
-        ? ((item.price + item.additionalPrice) * 100 * item.qty) / 100
-        : (item.price * 100 * item.qty) / 100),
+    (acc, item) => acc + (item.price * 100 * item.qty) / 100,
     0
   );
-  // const itemsPrice = state.cartItems.reduce(
-  //   (acc, item) => acc + (item.price * 100 * item.qty) / 100,
-  //   0
-  // );
   state.itemsPrice = addDecimals(itemsPrice);
   const shippingPrice = itemsPrice === 0 ? 0 : state.shippingAddress ? 20 : 0;
   state.shippingPrice = addDecimals(shippingPrice);

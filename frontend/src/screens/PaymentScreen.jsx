@@ -41,11 +41,13 @@ function PaymentScreen() {
           email_address: userInfo.email,
           orderItems: cart.cartItems,
           shippingAddress: cart?.shippingAddress,
-          paymentMethod: cart.paymentMethod,
+          paymentMethod: "Card",
           itemsPrice: cart.itemsPrice,
           shippingPrice: cart.shippingPrice,
           taxPrice: cart.taxPrice,
           totalPrice: cart.totalPrice,
+          pickup: cart?.pickup?.val,
+          otype: cart?.shippingAddress ? "Delivery" : " pickup",
         }).unwrap();
         dispatch(clearcart());
         navigate(`/order/${res._id}`);
@@ -61,7 +63,7 @@ function PaymentScreen() {
           email_address: userInfo.email,
           orderItems: cart.cartItems,
           shippingAddress: cart?.shippingAddress,
-          paymentMethod: cart.paymentMethod,
+          paymentMethod: "Card",
           itemsPrice: cart.itemsPrice,
           shippingPrice: cart.shippingPrice,
           taxPrice: cart.taxPrice,
@@ -91,7 +93,7 @@ function PaymentScreen() {
                       <Row className="justify-content-md-center">
                         <Col md={2}>
                           <Image
-                            src={item.image}
+                            src={`http://localhost:5000${item.image}`}
                             alt={item.name}
                             fluid
                             rounded
@@ -101,15 +103,8 @@ function PaymentScreen() {
                           {item.name}
                         </Col>
                         <Col md={4}>
-                          {item.qty} x ${item.price}{" "}
-                          {item.addon && (
-                            <span> + ${item.additionalPrice}</span>
-                          )}{" "}
-                          = $
-                          {Math.round(
-                            item.qty *
-                              ((item.price + item.additionalPrice) * 100)
-                          ) / 100}
+                          {item.qty} x ${item.price} = $
+                          {Math.round(item.qty * (item.price * 100)) / 100}
                         </Col>
                       </Row>
                     </ListGroup.Item>
@@ -133,6 +128,12 @@ function PaymentScreen() {
                 </Col>
               </Row>
             </ListGroup.Item>
+            {cart.pickup.val && (
+              <ListGroup.Item>
+                <h2>Pick Up time</h2>
+                <p>{cart.pickup.val}</p>
+              </ListGroup.Item>
+            )}
             {cart.shippingAddress && (
               <ListGroup.Item>
                 <h2>Delivery Address</h2>
@@ -148,7 +149,7 @@ function PaymentScreen() {
             <ListGroup.Item className="my-3">
               <h2>Payment Info</h2>
               <strong>Method: </strong>
-              {cart.paymentMethod}
+              {"Card"}
             </ListGroup.Item>
           </ListGroup>
         </Col>

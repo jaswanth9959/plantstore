@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Navbar, Nav } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 function Dashboard() {
+  const navigate = useNavigate();
   const { userInfo } = useSelector((state) => state.auth);
+  console.log(userInfo);
+
+  useEffect(() => {
+    if (userInfo.first) {
+      navigate("/staffprofile");
+    }
+  }, [userInfo, navigate]);
+
   return (
     <div>
       <main className="py-3">
@@ -12,7 +22,7 @@ function Dashboard() {
           <Row>
             <Col md={3} className="sidebar">
               <Navbar bg="light" expand="lg" className="flex-column">
-                <Navbar.Brand>Welcome, {userInfo.firstname}</Navbar.Brand>
+                <Navbar.Brand>Welcome, {userInfo.firstName}</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                   <Nav className="flex-column">

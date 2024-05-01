@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const PlantSchema = new mongoose.Schema(
+const fertilizerSchema = new mongoose.Schema(
   {
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
@@ -10,15 +10,6 @@ const PlantSchema = new mongoose.Schema(
     name: {
       type: String,
       required: true,
-    },
-    type: {
-      type: String,
-      required: true,
-    },
-    category: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      ref: "Category",
     },
     image: {
       type: String,
@@ -41,6 +32,6 @@ const PlantSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Plant = mongoose.model("Plant", PlantSchema);
+const Fertilizer = mongoose.model("Fertilizer", fertilizerSchema);
 
-export default Plant;
+export default Fertilizer;

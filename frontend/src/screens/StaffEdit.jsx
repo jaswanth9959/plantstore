@@ -13,8 +13,16 @@ function StaffEdit() {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [ssn, setSsn] = useState("");
+  const [dob, setDob] = useState("");
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");
 
-  const { data: staff, isLoading, error } = useGetStaffByIDQuery(staffId);
+  const {
+    data: staff,
+    refetch,
+    isLoading,
+    error,
+  } = useGetStaffByIDQuery(staffId);
   const [updateStaff, { isLoading: loadingUpdate }] = useUpdateStaffMutation();
 
   const submitHandler = async (e) => {
@@ -26,7 +34,11 @@ function StaffEdit() {
         lastName,
         email,
         ssn,
+        dob,
+        address,
+        phone,
       }).unwrap();
+      refetch();
       window.alert("Staff Update Successful!");
     } catch (err) {
       window.alert(err?.data?.message || err.error);
@@ -39,6 +51,9 @@ function StaffEdit() {
       setLastName(staff.lastName);
       setEmail(staff.email);
       setSsn(staff.ssn);
+      setAddress(staff.address);
+      setDob(staff.dob);
+      setPhone(staff.phone);
     }
   }, [staff]);
   return (
@@ -108,6 +123,42 @@ function StaffEdit() {
                   placeholder="Enter Last Name"
                   value={ssn}
                   onChange={(e) => setSsn(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group controlId="formBasicS" className="form-group">
+                {" "}
+                {/* Add className */}
+                <Form.Label className="form-label">DOB</Form.Label>{" "}
+                {/* Add className */}
+                <Form.Control
+                  type="text"
+                  placeholder="Enter Date Of Birth"
+                  value={dob}
+                  onChange={(e) => setDob(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group controlId="dkdkdkdkd" className="form-group">
+                {" "}
+                {/* Add className */}
+                <Form.Label className="form-label">Phone</Form.Label>{" "}
+                {/* Add className */}
+                <Form.Control
+                  type="text"
+                  placeholder="Enter Phone Number"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group controlId="formBasicSSn122" className="form-group">
+                {" "}
+                {/* Add className */}
+                <Form.Label className="form-label">Address</Form.Label>{" "}
+                {/* Add className */}
+                <Form.Control
+                  type="text"
+                  placeholder="Enter Address"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
                 />
               </Form.Group>
 

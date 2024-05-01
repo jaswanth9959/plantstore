@@ -29,6 +29,11 @@ const loginStaff = asyncHandler(async (req, res) => {
       email: staff.email,
       ssn: staff.ssn,
       role: staff.role,
+      phone: staff.phone,
+      address: staff.address,
+      first: staff.first,
+      dob: staff.dob,
+
       token,
     });
   } else {
@@ -78,6 +83,9 @@ const updateStaff = asyncHandler(async (req, res) => {
     staff.lastName = req.body.lastName || staff.lastName;
     staff.email = req.body.email || staff.email;
     staff.ssn = req.body.ssn || staff.ssn;
+    staff.dob = req.body.dob || staff.dob;
+    staff.phone = req.body.phone || staff.phone;
+    staff.address = req.body.address || staff.address;
     const updateStaff = await staff.save();
     res.status(200).json({
       _id: updateStaff._id,
@@ -85,6 +93,9 @@ const updateStaff = asyncHandler(async (req, res) => {
       lastName: updateStaff.lastName,
       email: updateStaff.email,
       ssn: updateStaff.ssn,
+      address: updateStaff.address,
+      phone: updateStaff.phone,
+      dob: updateStaff.dob,
     });
   } else {
     res.status(404);
@@ -100,6 +111,10 @@ const updateStaffProfile = asyncHandler(async (req, res) => {
     user.lastname = req.body.lastname || user.lastname;
     user.email = req.body.email || user.email;
     user.ssn = req.body.ssn || user.ssn;
+    user.phone = req.body.phone || user.phone;
+    user.dob = req.body.dob || user.dob;
+    user.address = req.body.address || user.address;
+    user.first = false;
     if (req.body.password) {
       user.password = req.body.password;
     }
@@ -113,6 +128,9 @@ const updateStaffProfile = asyncHandler(async (req, res) => {
       email: updatedUser.email,
       role: updatedUser.role,
       ssn: updatedUser.ssn,
+      dob: updatedUser.dob,
+      address: updatedUser.address,
+      phone: updatedUser.phone,
       token: req.body.token,
     });
   } else {
@@ -122,7 +140,8 @@ const updateStaffProfile = asyncHandler(async (req, res) => {
 });
 
 const registerStaff = asyncHandler(async (req, res) => {
-  const { firstName, lastName, email, password, ssn } = req.body;
+  const { firstName, lastName, email, password, ssn, address, phone, dob } =
+    req.body;
 
   const staff = await Staff.create({
     firstName,
@@ -131,6 +150,9 @@ const registerStaff = asyncHandler(async (req, res) => {
     password,
     role: "staff",
     ssn,
+    address,
+    phone,
+    dob,
   });
   res.status(201).json({
     _id: staff._id,
@@ -139,6 +161,9 @@ const registerStaff = asyncHandler(async (req, res) => {
     email: staff.email,
     role: staff.role,
     ssn: staff.ssn,
+    dob: staff.dob,
+    address: staff.address,
+    phone: staff.phone,
   });
 });
 export {

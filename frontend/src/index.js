@@ -39,6 +39,9 @@ import PlantAdd from "./screens/PlantAdd";
 import CategoryEdit from "./screens/CategoryEdit";
 import CustomerDetails from "./screens/CustomerDetails";
 import StaffProfile from "./screens/StaffProfile";
+import Options from "./screens/Options";
+import PickUp from "./screens/PickUp";
+import FerScreen from "./screens/FerScreen";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
@@ -50,9 +53,12 @@ const router = createBrowserRouter(
         <Route path="/shipping" element={<AddressScreen />} />
         <Route path="/cart" element={<CartScreen />} />
         <Route path="/plant/:id" element={<PlantScreen />} />
+        <Route path="/fertilizer/:id" element={<FerScreen />} />
         <Route path="/payment" element={<PaymentScreen />} />
         <Route path="/order/:id" element={<OrderScreen />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/options" element={<Options />} />
+        <Route path="/pickup" element={<PickUp />} />
         <Route path="/staffprofile" element={<StaffProfile />} />
         <Route path="/myorders" element={<MyOrders />} />
       </Route>
@@ -62,6 +68,10 @@ const router = createBrowserRouter(
           <Route
             path="/dashboard/counter/plant/:id"
             element={<PlantScreen />}
+          />
+          <Route
+            path="/dashboard/counter/fertilizer/:id"
+            element={<FerScreen />}
           />
           <Route path="/dashboard/cart" element={<CartScreen />} />
           <Route path="/dashboard/admin" element={<Admin />} />
