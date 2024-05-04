@@ -12,16 +12,8 @@
     "data:import": "node backend/seeder.js",
     "data:destroy": " node backend/seeder.js -d"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jaswanth9959/plantstore.git"
-  },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jaswanth9959/plantstore/issues"
-  },
-  "homepage": "https://github.com/jaswanth9959/plantstore#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "concurrently": "^8.2.2",
