@@ -122,7 +122,9 @@ function PaymentScreen() {
                   Delivery Cost:{" "}
                   <strong>
                     $
-                    {cart.shippingAddress.address ? `${cart.shippingPrice}` : 0}
+                    {cart?.shippingAddress?.address
+                      ? `${cart.shippingPrice}`
+                      : 0}
                   </strong>
                 </Col>
 
