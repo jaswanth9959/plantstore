@@ -7,3 +7,4 @@ export const STAFF_URL = "/api/staff";
 export const ORDERS_URL = "/api/orders";
 export const CATEGORY_URL = "/api/category";
 export const FER_URL = "/api/fer";
+export const SER_URL = "/api/ser";

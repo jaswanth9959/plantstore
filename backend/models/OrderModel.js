@@ -18,14 +18,6 @@ const orderSchema = mongoose.Schema(
         qty: { type: Number, required: true },
         image: { type: String, required: true },
         price: { type: Number, required: true },
-        addon: { type: Boolean },
-        additionalPrice: { type: Number, required: true, default: 0 },
-        customize: { type: String },
-        plant: {
-          type: mongoose.Schema.Types.ObjectId,
-          required: true,
-          ref: "Plant",
-        },
       },
     ],
     shippingAddress: {
@@ -84,6 +76,15 @@ const orderSchema = mongoose.Schema(
     },
     otype: {
       type: String,
+    },
+    ferPrice: {
+      type: Number,
+    },
+    potPrice: {
+      type: Number,
+    },
+    servicePrice: {
+      type: Number,
     },
   },
   {

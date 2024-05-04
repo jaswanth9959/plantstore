@@ -1,2 +1,7 @@
-const categorires = [{ name: "land" }, { name: "water" }, { name: "cactus" }];
+const categorires = [
+  { name: "Plant" },
+  { name: "Service" },
+  { name: "Fertilizer" },
+  { name: "Tool" },
+];
 export default categorires;

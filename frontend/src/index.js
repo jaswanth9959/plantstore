@@ -42,6 +42,13 @@ import StaffProfile from "./screens/StaffProfile";
 import Options from "./screens/Options";
 import PickUp from "./screens/PickUp";
 import FerScreen from "./screens/FerScreen";
+import Tools from "./screens/Tools";
+import Services from "./screens/Services";
+import Fertilzers from "./screens/Fertilzers";
+import EditService from "./screens/EditService";
+import AddService from "./screens/AddService";
+import AddFertilizer from "./screens/AddFertilizer";
+import EditFertilizer from "./screens/EditFertilizer";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
@@ -74,6 +81,19 @@ const router = createBrowserRouter(
             element={<FerScreen />}
           />
           <Route path="/dashboard/cart" element={<CartScreen />} />
+          <Route path="/dashboard/tools" element={<Tools />} />
+          <Route path="/dashboard/services" element={<Services />} />
+          <Route path="/dashboard/service/:id" element={<EditService />} />
+          <Route path="/dashboard/service/create" element={<AddService />} />
+          <Route path="/dashboard/fertilizers" element={<Fertilzers />} />
+          <Route
+            path="/dashboard/fertilizer/:id"
+            element={<EditFertilizer />}
+          />
+          <Route
+            path="/dashboard/fertilizer/create"
+            element={<AddFertilizer />}
+          />
           <Route path="/dashboard/admin" element={<Admin />} />
           <Route path="/dashboard/orders" element={<Orders />} />
           <Route path="/dashboard/plants" element={<Plants />} />

@@ -6,6 +6,7 @@ import Payment from "../models/paymentModel.js";
 const createorder = asyncHandler(async (req, res) => {
   const {
     orderItems,
+    user,
     pickup,
     otype,
     shippingAddress,
@@ -36,12 +37,8 @@ const createorder = asyncHandler(async (req, res) => {
   const order = new Order({
     orderItems: orderItems.map((x) => ({
       ...x,
-      plant: x._id,
-      customize: x.custom,
-      additionalPrice: x.additionalPrice,
-      _id: undefined,
     })),
-    user: req.user._id,
+    user: user,
     shippingAddress,
     paymentMethod,
     isPaid: true,

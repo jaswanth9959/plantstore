@@ -11,6 +11,10 @@ import Staff from "./models/staffModel.js";
 import categorires from "./data/category.js";
 import Fertilizer from "./models/fertilizer.js";
 import fertilizers from "./data/fertilizer.js";
+import Service from "./models/ServiceModel.js";
+import Tool from "./models/ToolModel.js";
+import tools from "./data/tool.js";
+import services from "./data/services.js";
 dotenv.config();
 
 await connectDB();
@@ -22,12 +26,26 @@ const importData = async () => {
     await Staff.deleteMany();
     await Category.deleteMany();
     await Fertilizer.deleteMany();
+    await Tool.deleteMany();
+    await Service.deleteMany();
     await User.insertMany(users);
     const createdCategory = await Category.insertMany(categorires);
     const createdStaff = await Staff.insertMany(staff);
 
     const adminStaff = createdStaff[0]._id;
     const sampleFer = fertilizers.map((fer) => {
+      return {
+        ...fer,
+        createdBy: adminStaff,
+      };
+    });
+    const sampletool = tools.map((fer) => {
+      return {
+        ...fer,
+        createdBy: adminStaff,
+      };
+    });
+    const sampleSer = services.map((fer) => {
       return {
         ...fer,
         createdBy: adminStaff,
@@ -44,6 +62,8 @@ const importData = async () => {
 
     await Plant.insertMany(samplePlants);
     await Fertilizer.insertMany(sampleFer);
+    await Tool.insertMany(sampletool);
+    await Service.insertMany(sampleSer);
     console.log("---DATA HAS BEEN IMPORTED---");
     process.exit();
   } catch (error) {
@@ -60,6 +80,8 @@ const destroyData = async () => {
     await Staff.deleteMany();
     await Category.deleteMany();
     await Fertilizer.deleteMany();
+    await Tool.deleteMany();
+    await Service.deleteMany();
 
     console.log("---DATA HAS BEEN DESTROYED---");
     process.exit();

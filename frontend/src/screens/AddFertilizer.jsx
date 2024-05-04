@@ -3,21 +3,21 @@ import { Form, Button, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 import {
-  useCreatePlantMutation,
-  useUploadPlantImageMutation,
-} from "../slices/plantsApiSlice";
+  useCreateFerMutation,
+  useUploadFerImageMutation,
+} from "../slices/ferApiSlice";
 import { useSelector } from "react-redux";
 
-function PlantAdd() {
+function AddFertilizer() {
   const { userInfo } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
   const [image, setImage] = useState("");
-  const [createPlant, { isLoading: loadingUpdate }] = useCreatePlantMutation();
+  const [createPlant, { isLoading: loadingUpdate }] = useCreateFerMutation();
   const [uploadPlantImage, { isLoading: loadingUpload }] =
-    useUploadPlantImageMutation();
+    useUploadFerImageMutation();
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
@@ -29,7 +29,7 @@ function PlantAdd() {
         price,
       }).unwrap();
       window.alert("created Successfully");
-      navigate("/dashboard/plants");
+      navigate("/dashboard/fertilizers");
     } catch (err) {
       window.alert(err?.data?.message || err.error);
     }
@@ -49,14 +49,14 @@ function PlantAdd() {
   return (
     <Row className="justify-content-md-center mt-5">
       <Col md={6}>
-        <LinkContainer to="/dashboard/plants">
+        <LinkContainer to="/dashboard/services">
           <Button variant="dark">Back</Button>
         </LinkContainer>
 
         <div className="login-container mt-3">
           {" "}
           {/* Add className */}
-          <h2 className="login-heading">Plant Addition Form</h2>{" "}
+          <h2 className="login-heading"> Addition Form</h2>{" "}
           {/* Add className */}
           <Form onSubmit={submitHandler}>
             <Form.Group controlId="formBasicEmail2" className="form-group">
@@ -66,7 +66,7 @@ function PlantAdd() {
               {/* Add className */}
               <Form.Control
                 type="text"
-                placeholder="Enter plant name"
+                placeholder="Enter name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
@@ -129,4 +129,4 @@ function PlantAdd() {
   );
 }
 
-export default PlantAdd;
+export default AddFertilizer;

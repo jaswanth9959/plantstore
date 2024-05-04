@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const PlantSchema = new mongoose.Schema(
+const toolSchema = new mongoose.Schema(
   {
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
@@ -11,7 +11,6 @@ const PlantSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-
     image: {
       type: String,
       required: true,
@@ -29,6 +28,6 @@ const PlantSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Plant = mongoose.model("Plant", PlantSchema);
+const Tool = mongoose.model("Tool", toolSchema);
 
-export default Plant;
+export default Tool;

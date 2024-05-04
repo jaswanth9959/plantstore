@@ -38,6 +38,7 @@ function PaymentScreen() {
           cardNumber: card,
           status: true,
           token: userInfo.token,
+          user: userInfo._id,
           email_address: userInfo.email,
           orderItems: cart.cartItems,
           shippingAddress: cart?.shippingAddress,
@@ -64,6 +65,9 @@ function PaymentScreen() {
           orderItems: cart.cartItems,
           shippingAddress: cart?.shippingAddress,
           paymentMethod: "Card",
+          ferPrice: cart.ferPrice,
+          potPrice: cart.potPrice,
+          servicePrice: cart.servicePrice,
           itemsPrice: cart.itemsPrice,
           shippingPrice: cart.shippingPrice,
           taxPrice: cart.taxPrice,
@@ -99,7 +103,7 @@ function PaymentScreen() {
                             rounded
                           />
                         </Col>
-                        <Col md={6} className="text-center">
+                        <Col md={3} className="text-center">
                           {item.name}
                         </Col>
                         <Col md={4}>
@@ -115,11 +119,13 @@ function PaymentScreen() {
             <ListGroup.Item>
               <Row>
                 <Col>
-                  Delivery Charge:{" "}
+                  Delivery Cost:{" "}
                   <strong>
-                    ${cart.shippingAddress ? `${cart.shippingPrice}` : 0}
+                    $
+                    {cart.shippingAddress.address ? `${cart.shippingPrice}` : 0}
                   </strong>
                 </Col>
+
                 <Col>
                   Tax Amount: <strong>${cart.taxPrice}</strong>
                 </Col>
@@ -128,10 +134,11 @@ function PaymentScreen() {
                 </Col>
               </Row>
             </ListGroup.Item>
-            {cart.pickup.val && (
+
+            {/* {cart.pickup?.val && (
               <ListGroup.Item>
                 <h2>Pick Up time</h2>
-                <p>{cart.pickup.val}</p>
+                <p>{cart.pickup?.val}</p>
               </ListGroup.Item>
             )}
             {cart.shippingAddress && (
@@ -144,7 +151,7 @@ function PaymentScreen() {
                   {cart.shippingAddress.country}
                 </p>
               </ListGroup.Item>
-            )}
+            )} */}
 
             <ListGroup.Item className="my-3">
               <h2>Payment Info</h2>

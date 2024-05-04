@@ -1,13 +1,13 @@
 import asyncHandler from "../middlewares/asynchandler.js";
-import Plant from "../models/plantModel.js";
+import Service from "../models/ServiceModel.js";
 import Category from "../models/categoryModel.js";
-const getPlants = asyncHandler(async (req, res) => {
-  const plants = await Plant.find({}).populate("name");
+const getServices = asyncHandler(async (req, res) => {
+  const plants = await Service.find({}).populate("name");
   res.json(plants);
 });
 
-const getPlantById = asyncHandler(async (req, res) => {
-  const plant = await Plant.findById(req.params.id).populate("name");
+const getSerById = asyncHandler(async (req, res) => {
+  const plant = await Service.findById(req.params.id).populate("name");
   if (plant) {
     res.json(plant);
   } else {
@@ -16,11 +16,11 @@ const getPlantById = asyncHandler(async (req, res) => {
   }
 });
 
-const deletePlant = asyncHandler(async (req, res) => {
-  const plant = await Plant.findById(req.params.id);
+const deleteSer = asyncHandler(async (req, res) => {
+  const plant = await Service.findById(req.params.id);
 
   if (plant) {
-    await Plant.deleteOne({ _id: plant._id });
+    await Service.deleteOne({ _id: plant._id });
     res.json({ message: "plant removed" });
   } else {
     res.status(404);
@@ -28,9 +28,9 @@ const deletePlant = asyncHandler(async (req, res) => {
   }
 });
 
-const createPlant = asyncHandler(async (req, res) => {
-  const { userId, name, category, image, description, price } = req.body;
-  const plant = new Plant({
+const createSer = asyncHandler(async (req, res) => {
+  const { userId, name, image, description, price } = req.body;
+  const plant = new Service({
     name,
     price,
     createdBy: userId,
@@ -45,10 +45,10 @@ const createPlant = asyncHandler(async (req, res) => {
   }
 });
 
-const updatePlant = asyncHandler(async (req, res) => {
+const updateSer = asyncHandler(async (req, res) => {
   const { name, image, description, price } = req.body;
 
-  const plant = await Plant.findById(req.params.id);
+  const plant = await Service.findById(req.params.id);
 
   if (plant) {
     plant.name = name;
@@ -63,4 +63,4 @@ const updatePlant = asyncHandler(async (req, res) => {
   }
 });
 
-export { getPlantById, getPlants, createPlant, deletePlant, updatePlant };
+export { getSerById, getServices, createSer, updateSer, deleteSer };

@@ -1,11 +1,15 @@
 import express from "express";
-import {
-  getAllFertilizers,
-  getFerById,
-} from "../controllers/categoryControllers.js";
 const router = express.Router();
+import {
+  getFerById,
+  getfers,
+  deletefer,
+  createFer,
+  updateFer,
+} from "../controllers/fertilizerController.js";
 
-router.route("/").get(getAllFertilizers);
-router.route("/:id").get(getFerById);
+router.route("/").get(getfers).post(createFer);
+
+router.route("/:id").get(getFerById).put(updateFer).delete(deletefer);
 
 export default router;

@@ -11,6 +11,7 @@ import orderRoutes from "./routes/orderRoutes.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
 import uploadRoutes from "./routes/uploadRoutes.js";
 import ferRoutes from "./routes/ferRoutes.js";
+import serRoutes from "./routes/serviceRoutes.js";
 import path from "path";
 dotenv.config();
 const port = process.env.PORT || 8000;
@@ -30,6 +31,7 @@ app.use("/api/staff", staffRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/category", categoryRoutes);
 app.use("/api/fer", ferRoutes);
+app.use("/api/ser", serRoutes);
 app.use("/api/upload", uploadRoutes);
 
 const __dirname = path.resolve();

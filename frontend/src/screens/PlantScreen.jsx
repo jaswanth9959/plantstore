@@ -7,18 +7,53 @@ import { FaShoppingCart } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { addTocart } from "../slices/cartSlice";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 function PlantScreen() {
+  const addDecimals = (num) => {
+    return (Math.round(num * 100) / 100).toFixed(2);
+  };
   const { id } = useParams();
   const { userInfo } = useSelector((state) => state.auth);
   const { data: plant, isLoading, error } = useGetPlantByIdQuery(id);
-
   const [qty, setQty] = useState(1);
-  const [custom, setCustom] = useState("");
+  const [custom, setCustom] = useState(0);
+  const [includeFer, setIncludeFer] = useState(false);
+  const [includePot, setIncludePot] = useState(false);
+  const [includeService, setIncludeService] = useState(false);
+
+  const [fer, setFer] = useState(0);
+  const [pot, setPot] = useState(0);
+  const [service, setService] = useState(0);
+  const handleFer = (e) => {
+    setIncludeFer(e.target.checked);
+
+    if (!includeFer) {
+      setFer(plant.fercost);
+    } else {
+      setFer(0);
+    }
+  };
+
+  const handlePot = (e) => {
+    setIncludePot(e.target.checked);
+
+    if (!includePot) {
+      setPot(5);
+    } else {
+      setPot(0);
+    }
+  };
+
+  const handleArea = (e) => {
+    e.preventDefault();
+    setService(5 * custom);
+  };
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const AddToCarthandler = () => {
-    dispatch(addTocart({ ...plant, qty, custom }));
+    dispatch(addTocart({ ...plant, qty, custom, fer, pot, service }));
     if (userInfo.role === "user") {
       navigate("/cart");
     } else {
@@ -26,6 +61,11 @@ function PlantScreen() {
     }
   };
 
+  useEffect(() => {
+    if (includeService === false) {
+      setService(0);
+    }
+  }, [includeService]);
   return (
     <>
       <Link to="/">
@@ -111,30 +151,104 @@ function PlantScreen() {
                     </Row>
                   </ListGroup.Item>
                 )}
+
                 <ListGroup.Item>
                   <Row>
-                    <Col md={4}>Customization</Col>
+                    <Col md={4}>Suggested Fertilizer:</Col>
                     <Col>
-                      <Form.Control
-                        type="text"
-                        placeholder="Customize your plant. let us know how you want it."
-                        value={custom}
-                        required
-                        onChange={(e) => setCustom(e.target.value)}
-                      ></Form.Control>
+                      <strong>{plant.fertilizer} </strong>
+                      <strong>cost: ${plant.fercost}</strong>
+                    </Col>
+                  </Row>
+                  <Row>
+                    {" "}
+                    <Col md={4}></Col>
+                    <Col>
+                      <Form.Check
+                        type="checkbox"
+                        label="Include Fertilizer"
+                        checked={includeFer}
+                        onChange={(e) => handleFer(e)}
+                      ></Form.Check>{" "}
                     </Col>
                   </Row>
                 </ListGroup.Item>
-                <ListGroup.Item className="d-flex justify-content-end">
-                  <Button
-                    className=" btn btn-block"
-                    type="button"
-                    disabled={plant.stock === 0}
-                    style={{ width: "280px" }}
-                    onClick={AddToCarthandler}
-                  >
-                    <FaShoppingCart /> Add
-                  </Button>
+                <ListGroup.Item>
+                  <Row>
+                    <Col md={4}>Pot Cost:</Col>
+                    <Col>
+                      <strong>${5}</strong>
+                    </Col>
+                  </Row>
+                  <Row>
+                    {" "}
+                    <Col md={4}></Col>
+                    <Col>
+                      <Form.Check
+                        type="checkbox"
+                        label="Include Pot"
+                        checked={includePot}
+                        onChange={(e) => handlePot(e)}
+                      ></Form.Check>{" "}
+                    </Col>
+                  </Row>
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  <Row>
+                    <Col>
+                      {" "}
+                      <Form.Check
+                        type="checkbox"
+                        label="Include Service Planting and Cleaning Services( Cost: $5 per Sq Feet)"
+                        checked={includeService}
+                        onChange={(e) => setIncludeService(e.target.checked)}
+                      ></Form.Check>{" "}
+                    </Col>
+                  </Row>
+                </ListGroup.Item>
+
+                {includeService && (
+                  <ListGroup.Item>
+                    <Row>
+                      <Col md={4}>Area of Land in Sq Feet</Col>
+                      <Col>
+                        <Form onSubmit={(e) => handleArea(e)}>
+                          <Form.Control
+                            type="number"
+                            placeholder="Enter Area in Sq Feet"
+                            value={custom}
+                            onChange={(e) => setCustom(e.target.value)}
+                            required
+                          ></Form.Control>
+                          <Button type="submit" className="m-2">
+                            Save
+                          </Button>
+                        </Form>
+                      </Col>
+                    </Row>
+                  </ListGroup.Item>
+                )}
+                <ListGroup.Item>
+                  <Row>
+                    <Col>
+                      Effective price:{" "}
+                      <strong>
+                        $
+                        {addDecimals(qty * (fer + service + pot + plant.price))}
+                      </strong>
+                    </Col>
+                    <Col>
+                      <Button
+                        className=" btn btn-block"
+                        type="button"
+                        disabled={plant.stock === 0}
+                        style={{ width: "280px" }}
+                        onClick={AddToCarthandler}
+                      >
+                        <FaShoppingCart /> Add
+                      </Button>
+                    </Col>
+                  </Row>
                 </ListGroup.Item>
               </ListGroup>
             </Col>

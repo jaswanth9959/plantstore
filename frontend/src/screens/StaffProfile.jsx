@@ -65,121 +65,176 @@ function StaffProfile() {
             {" "}
             {/* Add className */}
             <h2 className="login-heading">
-              {userInfo.first
-                ? "Confirm Details and please update password"
-                : "Update Profile"}
+              {userInfo.first ? "please update password" : "Update Profile"}
             </h2>{" "}
             {/* Add className */}
             <Form onSubmit={submitHandler}>
-              <Form.Group controlId="formBasicFN" className="form-group">
-                {" "}
-                {/* Add className */}
-                <Form.Label className="form-label">First Name</Form.Label>{" "}
-                {/* Add className */}
-                <Form.Control
-                  type="text"
-                  placeholder="Enter First Name"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                />
-              </Form.Group>
+              {userInfo.first ? (
+                <>
+                  {" "}
+                  <Form.Group
+                    controlId="formBasicPassword"
+                    className="form-group"
+                  >
+                    {" "}
+                    {/* Add className */}
+                    <Form.Label className="form-label">
+                      Password
+                    </Form.Label>{" "}
+                    {/* Add className */}
+                    <Form.Control
+                      type="password"
+                      placeholder="Password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group
+                    controlId="formBasicConfirmPassword"
+                    className="form-group"
+                  >
+                    <Form.Label className="form-label">
+                      ReEnter-Password
+                    </Form.Label>
+                    <Form.Control
+                      type="password"
+                      placeholder="Password"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                    />
+                  </Form.Group>
+                </>
+              ) : (
+                <>
+                  <Form.Group controlId="formBasicFN" className="form-group">
+                    {" "}
+                    {/* Add className */}
+                    <Form.Label className="form-label">
+                      First Name
+                    </Form.Label>{" "}
+                    {/* Add className */}
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter First Name"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                    />
+                  </Form.Group>
 
-              <Form.Group controlId="formBasicLN" className="form-group">
-                {" "}
-                {/* Add className */}
-                <Form.Label className="form-label">Last Name</Form.Label>{" "}
-                {/* Add className */}
-                <Form.Control
-                  type="text"
-                  placeholder="Enter Last Name"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group controlId="formBasicEmail" className="form-group">
-                {" "}
-                {/* Add className */}
-                <Form.Label className="form-label">
-                  Email address
-                </Form.Label>{" "}
-                {/* Add className */}
-                <Form.Control
-                  type="email"
-                  placeholder="Enter email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </Form.Group>
+                  <Form.Group controlId="formBasicLN" className="form-group">
+                    {" "}
+                    {/* Add className */}
+                    <Form.Label className="form-label">
+                      Last Name
+                    </Form.Label>{" "}
+                    {/* Add className */}
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter Last Name"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group controlId="formBasicEmail" className="form-group">
+                    {" "}
+                    {/* Add className */}
+                    <Form.Label className="form-label">
+                      Email address
+                    </Form.Label>{" "}
+                    {/* Add className */}
+                    <Form.Control
+                      type="email"
+                      placeholder="Enter email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </Form.Group>
 
-              <Form.Group controlId="formBasicaddress" className="form-group">
-                <Form.Label className="form-label">SSn</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter SSN"
-                  value={ssn}
-                  onChange={(e) => setSsn(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group controlId="formBasicS" className="form-group">
-                {" "}
-                {/* Add className */}
-                <Form.Label className="form-label">DOB</Form.Label>{" "}
-                {/* Add className */}
-                <Form.Control
-                  type="text"
-                  placeholder="Enter Date Of Birth"
-                  value={dob}
-                  onChange={(e) => setDob(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group controlId="dkdkdkdkd" className="form-group">
-                {" "}
-                {/* Add className */}
-                <Form.Label className="form-label">Phone</Form.Label>{" "}
-                {/* Add className */}
-                <Form.Control
-                  type="text"
-                  placeholder="Enter Phone Number"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group controlId="formBasicSSn122" className="form-group">
-                {" "}
-                {/* Add className */}
-                <Form.Label className="form-label">Address</Form.Label>{" "}
-                {/* Add className */}
-                <Form.Control
-                  type="text"
-                  placeholder="Enter Address"
-                  value={address}
-                  onChange={(e) => setAddress(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group controlId="formBasicPassword" className="form-group">
-                {" "}
-                {/* Add className */}
-                <Form.Label className="form-label">Password</Form.Label>{" "}
-                {/* Add className */}
-                <Form.Control
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group
-                controlId="formBasicConfirmPassword"
-                className="form-group"
-              >
-                <Form.Label className="form-label">ReEnter-Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  placeholder="Password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                />
-              </Form.Group>
+                  <Form.Group
+                    controlId="formBasicaddress"
+                    className="form-group"
+                  >
+                    <Form.Label className="form-label">SSn</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter SSN"
+                      value={ssn}
+                      onChange={(e) => setSsn(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group controlId="formBasicS" className="form-group">
+                    {" "}
+                    {/* Add className */}
+                    <Form.Label className="form-label">DOB</Form.Label>{" "}
+                    {/* Add className */}
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter Date Of Birth"
+                      value={dob}
+                      onChange={(e) => setDob(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group controlId="dkdkdkdkd" className="form-group">
+                    {" "}
+                    {/* Add className */}
+                    <Form.Label className="form-label">Phone</Form.Label>{" "}
+                    {/* Add className */}
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter Phone Number"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group
+                    controlId="formBasicSSn122"
+                    className="form-group"
+                  >
+                    {" "}
+                    {/* Add className */}
+                    <Form.Label className="form-label">Address</Form.Label>{" "}
+                    {/* Add className */}
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter Address"
+                      value={address}
+                      onChange={(e) => setAddress(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group
+                    controlId="formBasicPassword"
+                    className="form-group"
+                  >
+                    {" "}
+                    {/* Add className */}
+                    <Form.Label className="form-label">
+                      Password
+                    </Form.Label>{" "}
+                    {/* Add className */}
+                    <Form.Control
+                      type="password"
+                      placeholder="Password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group
+                    controlId="formBasicConfirmPassword"
+                    className="form-group"
+                  >
+                    <Form.Label className="form-label">
+                      ReEnter-Password
+                    </Form.Label>
+                    <Form.Control
+                      type="password"
+                      placeholder="Password"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                    />
+                  </Form.Group>
+                </>
+              )}
+
               <Button type="submit" className="submit-button">
                 {" "}
                 {/* Add className */}

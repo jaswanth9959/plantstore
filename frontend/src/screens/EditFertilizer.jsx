@@ -3,31 +3,26 @@ import { Form, Button, Row, Col } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 import {
-  useGetPlantByIdQuery,
-  useUpdatePlantMutation,
-  useUploadPlantImageMutation,
-} from "../slices/plantsApiSlice";
+  useGetferByIdQuery,
+  useUpdateFerMutation,
+  useUploadFerImageMutation,
+} from "../slices/ferApiSlice";
 
-function PlantEdit() {
-  const { id: plantId } = useParams();
+function EditFertilizer() {
+  const { id } = useParams();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
   const [image, setImage] = useState("");
-  const {
-    data: plant,
-    refetch,
-    isLoading,
-    error,
-  } = useGetPlantByIdQuery(plantId);
-  const [updatePlant, { isLoading: loadingUpdate }] = useUpdatePlantMutation();
+  const { data: plant, refetch, isLoading, error } = useGetferByIdQuery(id);
+  const [updatePlant, { isLoading: loadingUpdate }] = useUpdateFerMutation();
   const [uploadPlantImage, { isLoading: loadingUpload }] =
-    useUploadPlantImageMutation();
+    useUploadFerImageMutation();
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
       await updatePlant({
-        plantId,
+        id,
         name,
         image,
         description,
@@ -63,7 +58,7 @@ function PlantEdit() {
   return (
     <Row className="justify-content-md-center mt-5">
       <Col md={6}>
-        <LinkContainer to="/dashboard/plants">
+        <LinkContainer to="/dashboard/fertilizers">
           <Button variant="dark">Back</Button>
         </LinkContainer>
         {isLoading ? (
@@ -74,8 +69,7 @@ function PlantEdit() {
           <div className="login-container mt-3">
             {" "}
             {/* Add className */}
-            <h2 className="login-heading">Plant Edit Form</h2>{" "}
-            {/* Add className */}
+            <h2 className="login-heading">Edit Form</h2> {/* Add className */}
             <Form onSubmit={submitHandler}>
               <Form.Group controlId="formBasicEmail2" className="form-group">
                 {" "}
@@ -148,4 +142,4 @@ function PlantEdit() {
   );
 }
 
-export default PlantEdit;
+export default EditFertilizer;

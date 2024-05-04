@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 function Dashboard() {
   const navigate = useNavigate();
   const { userInfo } = useSelector((state) => state.auth);
-  console.log(userInfo);
 
   useEffect(() => {
     if (userInfo.first) {
@@ -34,9 +33,6 @@ function Dashboard() {
                     </LinkContainer>
                     {userInfo.role === "admin" && (
                       <>
-                        <LinkContainer to="/dashboard/categories">
-                          <Nav.Link>Categories</Nav.Link>
-                        </LinkContainer>
                         <LinkContainer to="/dashboard/staff">
                           <Nav.Link>Staff</Nav.Link>
                         </LinkContainer>
@@ -44,6 +40,12 @@ function Dashboard() {
                     )}
                     <LinkContainer to="/dashboard/users">
                       <Nav.Link>Customers</Nav.Link>
+                    </LinkContainer>
+                    <LinkContainer to="/dashboard/fertilizers">
+                      <Nav.Link>Fertilzers and pots</Nav.Link>
+                    </LinkContainer>
+                    <LinkContainer to="/dashboard/services">
+                      <Nav.Link>Services</Nav.Link>
                     </LinkContainer>
                   </Nav>
                 </Navbar.Collapse>

@@ -24,10 +24,6 @@ const fertilizerSchema = new mongoose.Schema(
       required: true,
       default: 0,
     },
-    stock: {
-      type: Number,
-      required: true,
-    },
   },
   { timestamps: true }
 );

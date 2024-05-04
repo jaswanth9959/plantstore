@@ -1,15 +1,12 @@
 import React from "react";
 import { Table, Button, Row, Col } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import {
-  useGetPlantsQuery,
-  useDeletePlantMutation,
-} from "../slices/plantsApiSlice";
+import { useGetfersQuery, useDeleteFerMutation } from "../slices/ferApiSlice";
 
-function Rooms() {
-  const { data: plants, refetch, isLoading, error } = useGetPlantsQuery();
+function Fertilzers() {
+  const { data: plants, refetch, isLoading, error } = useGetfersQuery();
 
-  const [deletePlant, { isLoading: loadingDelete }] = useDeletePlantMutation();
+  const [deletePlant, { isLoading: loadingDelete }] = useDeleteFerMutation();
 
   const deleteHandler = async (id) => {
     try {
@@ -24,10 +21,10 @@ function Rooms() {
       {" "}
       <Col md={12}>
         <h2 className="text-center my-4">
-          <strong>Plants</strong>
+          <strong>Fertilizers and Pots</strong>
         </h2>
-        <LinkContainer to="/dashboard/plant/create">
-          <Button variant="success">Add New Plant</Button>
+        <LinkContainer to="/dashboard/fertilizer/create">
+          <Button variant="success">Add New </Button>
         </LinkContainer>
         {isLoading ? (
           <p>Loading...</p>
@@ -52,7 +49,7 @@ function Rooms() {
 
                   <td>
                     <>
-                      <LinkContainer to={`/dashboard/plant/${plant._id}`}>
+                      <LinkContainer to={`/dashboard/fertilizer/${plant._id}`}>
                         <Button className="btn-sm mx-1" variant="warning">
                           Edit
                         </Button>
@@ -77,4 +74,4 @@ function Rooms() {
   );
 }
 
-export default Rooms;
+export default Fertilzers;

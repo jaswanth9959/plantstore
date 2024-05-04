@@ -11,6 +11,7 @@ const staff = [
     dob: "04/24/1998",
     phone: "123456",
     address: "lees summit",
+    role: "admin",
   },
   {
     firstName: "staff",

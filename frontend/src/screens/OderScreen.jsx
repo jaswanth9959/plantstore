@@ -46,40 +46,36 @@ function OrderScreen() {
                       </Col>
                       <Col>
                         <Row>
-                          <Col md={3}>{item.name}</Col>
-                          <Col md={3}>{item.qty}</Col>
-                          <Col md={4}>${item.qty * item.price}</Col>
+                          <Col md={2}>{item.name}</Col>
+                          <Col md={2}>Qty: {item.qty}</Col>
+                          <Col md={3}>${item.qty * item.price}</Col>
                         </Row>
-                        {item.customize && (
-                          <Row className="my-3">
-                            <Col md={12} className="text-start">
-                              <strong>Customization :</strong> {item.customize}
-                            </Col>
-                          </Row>
-                        )}
                       </Col>
                     </Row>
                   </ListGroup.Item>
                 ))}
               </ListGroup>
             </ListGroup.Item>
-            <Row className="text-center py-4">
-              <Col>
-                Delivery Charge: <strong>${order.shippingPrice}</strong>
-              </Col>
-              <Col>
-                Tax Amount: <strong>${order.taxPrice}</strong>
-              </Col>
-              <Col>
-                Total Amount: <strong>${order.totalPrice}</strong>
-              </Col>
-            </Row>
+            <ListGroup.Item>
+              <Row>
+                <Col>
+                  Delivery Cost: <strong>${order.shippingPrice}</strong>
+                </Col>
+
+                <Col>
+                  Tax Amount: <strong>${order.taxPrice}</strong>
+                </Col>
+                <Col>
+                  Total Amount: <strong>${order.totalPrice}</strong>
+                </Col>
+              </Row>
+            </ListGroup.Item>
             <ListGroup.Item>
               <h3>Customer Details:</h3>
               <p>
                 Name:{" "}
                 <strong>
-                  {order.user.firstName} {order.user.lastName}
+                  {order?.user.firstName} {order?.user.lastName}
                 </strong>
               </p>
 
@@ -100,6 +96,15 @@ function OrderScreen() {
                 </p>
               )}
             </ListGroup.Item>
+
+            {userInfo.role !== "user" && order.servicePrice !== 0 && (
+              <ListGroup.Item>
+                <p>
+                  <strong>Customer Needs Planting and Cleaning Services</strong>
+                </p>
+              </ListGroup.Item>
+            )}
+
             <ListGroup.Item>
               <h3>Payment Info:</h3>
               <p>

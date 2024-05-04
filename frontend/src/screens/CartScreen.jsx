@@ -19,7 +19,7 @@ const CartScreen = () => {
 
   const cart = useSelector((state) => state.cart1);
   const { userInfo } = useSelector((state) => state.auth);
-  const { cartItems, taxPrice } = cart;
+  const { cartItems, taxPrice, ferPrice, potPrice, servicePrice } = cart;
 
   const addToCartHandler = (product, qty) => {
     dispatch(addTocart({ ...product, qty }));
@@ -66,27 +66,10 @@ const CartScreen = () => {
                       rounded
                     />
                   </Col>
-                  <Col md={3}>{item.name} </Col>
-                  <Col md={2}>
-                    ${item.price}{" "}
-                    {item.addon && <span> + ${item.additionalPrice}</span>}
-                  </Col>
+                  <Col md={2}>{item.name} </Col>
+                  <Col md={2}>Cost: ${item.price} </Col>
 
-                  <Col md={2}>
-                    <Form.Control
-                      as="select"
-                      value={item.qty}
-                      onChange={(e) =>
-                        addToCartHandler(item, Number(e.target.value))
-                      }
-                    >
-                      {[...Array(item.stock).keys()].map((x) => (
-                        <option key={x + 1} value={x + 1}>
-                          {x + 1}
-                        </option>
-                      ))}
-                    </Form.Control>
-                  </Col>
+                  <Col md={2}>Qty: {item.qty}</Col>
                   <Col md={2}>
                     <Button
                       type="button"
@@ -97,6 +80,7 @@ const CartScreen = () => {
                     </Button>
                   </Col>
                 </Row>
+                <Row></Row>
               </ListGroup.Item>
             ))}
           </ListGroup>
@@ -133,12 +117,6 @@ const CartScreen = () => {
                 </Col>
               </Row>
             </ListGroup.Item>
-            {/* <ListGroup.Item>
-              <Row>
-                <Col>Shipping Amount:</Col>
-                <Col>${shippingPrice}</Col>
-              </Row>
-            </ListGroup.Item> */}
             <ListGroup.Item>
               <Row>
                 <Col>Tax Amount:</Col>
